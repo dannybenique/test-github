@@ -5,5 +5,4 @@
 
 aqui estoy en DDG-8
 
-# otro dato
-#* aqui un ejemplo de validacion
+estamos en otro ejemplo 
