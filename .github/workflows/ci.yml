@@ -9,13 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code  # descargar el codigo
+      # 1. Descarga el código del PR
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Super-Linter # ejecutar super-linter
+      # 2. Ejecuta Super-Linter (solo para Markdown)
+      - name: Run Super-Linter
         uses: github/super-linter@v5
         env:
           DEFAULT_BRANCH: main
-          FILTER_REGEX_INCLUDE: .*\.md # solo markdown
-          VALIDATE_ALL_CODEBASE: false # solo markdowns modificados en el Pull Request (PR)
-          MARKDOWN_CONFIG_FILE: .markdownlint.json
+          FILTER_REGEX_INCLUDE: .*\.md  # Solo archivos Markdown
+          VALIDATE_ALL_CODEBASE: false   # Solo archivos modificados en el PR
+
