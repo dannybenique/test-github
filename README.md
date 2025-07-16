@@ -4,3 +4,6 @@
 "me llamo Danny Benique Rivera"
 
 aqui estoy en DDG-8
+
+# otro dato
+#* aqui un ejemplo de validacion
