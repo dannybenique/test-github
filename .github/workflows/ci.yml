@@ -3,19 +3,29 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  pull-requests: write
+  
 jobs:
   super-linter:
     name: Linter Markdown
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code  # descargar el codigo
+      # 1. Descarga el código del PR
+      - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Necesario para análisis completo
 
-      - name: Run Super-Linter # ejecutar super-linter
+      # 2. Ejecuta Super-Linter (solo para Markdown)
+      - name: Run Super-Linter
         uses: github/super-linter@v5
         env:
           DEFAULT_BRANCH: main
-          FILTER_REGEX_INCLUDE: .*\.md # solo markdown
-          VALIDATE_ALL_CODEBASE: false # solo markdowns modificados en el Pull Request (PR)
-          MARKDOWN_CONFIG_FILE: .markdownlint.json
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_MARKDOWN: true  # Fuerza validación Markdown
+          FILTER_REGEX_INCLUDE: .*\.md  # Solo archivos Markdown
+          VALIDATE_ALL_CODEBASE: false   # Solo archivos modificados en el PR
+
